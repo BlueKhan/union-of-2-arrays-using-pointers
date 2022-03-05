@@ -1,0 +1,103 @@
+#include <iostream>
+using namespace std;
+void compress(int *w, int& size )
+{
+	int *x;
+	int *y;
+	int c=1;
+	int j=0;
+	x=new int[size];
+	x[0]=w[0];
+	for(int i=1;i<size;i++)
+	{
+		if(w[i]==x[j])
+		{
+			continue;
+		}
+		else
+		{
+			j++;
+			x[j]=w[i];
+			c++;
+		}
+	}
+	y=new int[c];
+	for(int i=0;i<c;i++)
+	{
+		y[i]=x[i];
+		cout<<y[i]<<" ";
+	}
+	//delete []x;
+}
+void un(int *a,int &s1,int *b,int &s2)
+{
+	int s3=s1+s2;
+	int temp;
+	int l=0;
+	int *x=new int[s3];
+	for(int i=0;i<s1;i++)
+	{
+			x[i]=a[i];
+	}
+
+	for(int j=0;j<s2;j++)
+	{
+		x[s1+j]=b[j];
+	}
+    cout<<endl<<"set 3:"<<endl;
+	for(int y=0;y<s3;y++)
+			{
+				cout<<x[y]<<" ";
+			}
+	cout<<endl<<"sort:"<<endl;
+    int i, j, min;
+   for (i = 0; i < s3 - 1; i++) 
+   {
+      min = i;
+      for (j = i + 1; j < s3; j++)
+      {
+          if (x[j] < x[min])
+      {min = j;
+      temp = x[i];
+      x[i] = x[min];
+      x[min] = temp;
+      }
+      }
+   }
+	for(int j=0;j<s3;j++)
+			{
+				cout<<x[j]<<" ";
+			}
+	cout<<endl<<"union:"<<endl;
+	compress(x,s3);
+	
+
+	
+}
+int main()
+{
+	int s1=0;
+	int s2=0;
+	int temp=0;
+	cout<<"enter size of arr1:";
+	cin>>s1;
+	int *p;
+	p=new int[s1];
+	for(int i=0;i<s1;i++)
+	{
+		cout<<"enter set 1:";
+		cin>>p[i];
+	}
+	cout<<"enter size of arr2:";
+	cin>>s2;
+	int *q;
+	q=new int[s2];
+	for(int i=0;i<s2;i++)
+	{
+		cout<<"enter set 2:";
+		cin>>q[i];
+	}
+	un(p,s1,q,s2);
+	//system("pause");
+	return 0;
+}
